@@ -18,7 +18,7 @@ if (!roomId) {
     roomId = 'main';
 }
 
-let localTrack = [];
+let localTrack = [];  // Index 0 for the audio(mic) and Index 1 for the video(camera)
 let remoteUsers = {};
 
 let joinRoomInit = async () => {
@@ -98,11 +98,40 @@ let handleUserLeft = async (user) => {
 
         let videoFrames = document.getElementsByClassName('video__container')
 
-        for (let i = 0; i<videoFrames.length; i++) {
+        for (let i = 0; i < videoFrames.length; i++) {
             videoFrames[i].style.height = '300px'
             videoFrames[i].style.width = '300px'
         }
     }
 }
+
+let toggleMic = async (e) => {
+    let button = e.currentTarget;
+
+    if (localTrack[0].muted) {
+        await localTrack[0].setMuted(false);
+        button.classList.add('active')
+    }
+    else {
+        await localTrack[0].setMuted(true);
+        button.classList.remove('active')
+    }
+}
+
+let toggleCamera = async (e) => {
+    let button = e.currentTarget;
+
+    if (localTrack[1].muted) {
+        await localTrack[1].setMuted(false);
+        button.classList.add('active')
+    }
+    else {
+        await localTrack[1].setMuted(true);
+        button.classList.remove('active')
+    }
+}
+
+document.getElementById('camera-btn').addEventListener("click", toggleCamera);
+document.getElementById('mic-btn').addEventListener("click", toggleMic);
 
 joinRoomInit();
