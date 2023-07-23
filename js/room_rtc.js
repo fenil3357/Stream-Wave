@@ -18,6 +18,12 @@ if (!roomId) {
     roomId = 'main';
 }
 
+let displayName = localStorage.getItem('display_name')
+
+if(!displayName) {
+    window.location = `lobby.html`
+}
+
 let localTrack = [];  // Index 0 for the audio(mic) and Index 1 for the video(camera)
 let remoteUsers = {};
 
