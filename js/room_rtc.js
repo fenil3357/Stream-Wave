@@ -1,10 +1,10 @@
 const APP_ID = "1d24b6e940dc411e8f8dac99fb739dce"
 
-let uid = localStorage.getItem('uid');
+let uid = sessionStorage.getItem('uid');
 
 if (!uid) {
     uid = String(Math.floor(Math.random() * 10000));
-    localStorage.setItem('uid', uid);
+    sessionStorage.setItem('uid', uid);
 }
 
 let token = null;
@@ -21,7 +21,7 @@ if (!roomId) {
     roomId = 'main';
 }
 
-let displayName = localStorage.getItem('display_name')
+let displayName = sessionStorage.getItem('display_name')
 
 if (!displayName) {
     window.location = `lobby.html`
